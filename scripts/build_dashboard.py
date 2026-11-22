@@ -37,7 +37,7 @@ def build_dashboard():
     img_shap_stability = get_base64_img("shap_cross_val_stability.png")
     img_uncertainty = get_base64_img("uncertainty_distribution.png")
 
-    html_content = f"""<!DOCTYPE html>
+    template = """<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -48,43 +48,42 @@ def build_dashboard():
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    body {{
+    body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #0b0f19;
       color: #e2e8f0;
-    }}
-    code, pre, .font-mono {{
+    }
+    code, pre, .font-mono {
       font-family: 'JetBrains Mono', monospace;
-    }}
-    .glass-card {{
+    }
+    .glass-card {
       background: rgba(17, 24, 39, 0.75);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-    }}
-    .glass-card-hover:hover {{
+    }
+    .glass-card-hover:hover {
       border-color: rgba(99, 102, 241, 0.4);
       box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.15);
-    }}
-    .tab-btn.active {{
+    }
+    .tab-btn.active {
       background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
       color: white;
       box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.35);
-    }}
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {{
+    }
+    ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
-    }}
-    ::-webkit-scrollbar-track {{
+    }
+    ::-webkit-scrollbar-track {
       background: #0f172a;
-    }}
-    ::-webkit-scrollbar-thumb {{
+    }
+    ::-webkit-scrollbar-thumb {
       background: #334155;
       border-radius: 4px;
-    }}
-    ::-webkit-scrollbar-thumb:hover {{
+    }
+    ::-webkit-scrollbar-thumb:hover {
       background: #475569;
-    }}
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
@@ -163,12 +162,9 @@ def build_dashboard():
   <!-- Main Content Container -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-8">
 
-    <!-- ===================================================================== -->
-    <!-- TAB 1: OVERVIEW & STORY                                              -->
-    <!-- ===================================================================== -->
+    <!-- TAB 1: OVERVIEW & STORY -->
     <div id="tab-content-overview" class="space-y-8">
       
-      <!-- Welcome Hero Banner -->
       <div class="glass-card rounded-2xl p-8 border border-indigo-500/20 relative overflow-hidden bg-gradient-to-br from-indigo-950/40 via-slate-900 to-slate-950">
         <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="relative z-10 max-w-3xl space-y-4">
@@ -195,7 +191,6 @@ def build_dashboard():
         </div>
       </div>
 
-      <!-- 3 Pillars Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="glass-card rounded-xl p-6 space-y-3 border-t-4 border-t-blue-500">
           <div class="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-lg">1</div>
@@ -225,7 +220,6 @@ def build_dashboard():
         </div>
       </div>
 
-      <!-- Underwriting Architecture Visual Flowchart -->
       <div class="glass-card rounded-xl p-6 space-y-4">
         <h3 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 flex items-center gap-2">
           <span>⚙️</span> End-to-End System Architecture
@@ -261,12 +255,9 @@ def build_dashboard():
 
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- TAB 2: LIVE UNDERWRITING SIMULATOR                                   -->
-    <!-- ===================================================================== -->
+    <!-- TAB 2: LIVE UNDERWRITING SIMULATOR -->
     <div id="tab-content-simulator" class="hidden space-y-8">
       
-      <!-- Interactive Underwriting Demo Banner -->
       <div class="glass-card rounded-2xl p-6 border border-emerald-500/30 bg-gradient-to-r from-emerald-950/30 via-slate-900 to-slate-950 flex flex-col md:flex-row items-center justify-between gap-6">
         <div class="space-y-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -284,7 +275,6 @@ def build_dashboard():
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- Left: Sliders Form (7 Cols) -->
         <div class="lg:col-span-7 glass-card rounded-2xl p-6 space-y-6">
           <h3 class="text-sm font-bold text-white uppercase tracking-wider text-slate-400 flex items-center justify-between">
             <span>Borrower Financial Profile</span>
@@ -293,7 +283,6 @@ def build_dashboard():
 
           <div class="space-y-4">
             
-            <!-- Loan Duration -->
             <div class="space-y-1.5">
               <div class="flex justify-between text-xs">
                 <label class="font-medium text-slate-300">Loan Duration (Months)</label>
@@ -307,7 +296,6 @@ def build_dashboard():
               </div>
             </div>
 
-            <!-- Credit Amount -->
             <div class="space-y-1.5">
               <div class="flex justify-between text-xs">
                 <label class="font-medium text-slate-300">Requested Credit Amount (DM / Currency)</label>
@@ -321,7 +309,6 @@ def build_dashboard():
               </div>
             </div>
 
-            <!-- Checking Account Status -->
             <div class="space-y-1.5">
               <label class="block text-xs font-medium text-slate-300">Checking Account Balance Status</label>
               <select id="input-checking" onchange="updateSimulator()" class="w-full px-3 py-2 rounded-lg bg-slate-800/90 border border-slate-700 text-xs text-white focus:outline-none focus:border-indigo-500">
@@ -332,7 +319,6 @@ def build_dashboard():
               </select>
             </div>
 
-            <!-- Savings Account Status -->
             <div class="space-y-1.5">
               <label class="block text-xs font-medium text-slate-300">Savings / Investment Reserves</label>
               <select id="input-savings" onchange="updateSimulator()" class="w-full px-3 py-2 rounded-lg bg-slate-800/90 border border-slate-700 text-xs text-white focus:outline-none focus:border-indigo-500">
@@ -344,7 +330,6 @@ def build_dashboard():
               </select>
             </div>
 
-            <!-- Age & Housing Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="space-y-1.5">
                 <div class="flex justify-between text-xs">
@@ -364,7 +349,6 @@ def build_dashboard():
               </div>
             </div>
 
-            <!-- Employment Duration -->
             <div class="space-y-1.5">
               <label class="block text-xs font-medium text-slate-300">Current Employment Stability</label>
               <select id="input-employment" onchange="updateSimulator()" class="w-full px-3 py-2 rounded-lg bg-slate-800/90 border border-slate-700 text-xs text-white focus:outline-none focus:border-indigo-500">
@@ -379,10 +363,8 @@ def build_dashboard():
           </div>
         </div>
 
-        <!-- Right: Real-time Decision & SHAP Breakdown (5 Cols) -->
         <div class="lg:col-span-5 space-y-6">
           
-          <!-- Decision Card -->
           <div id="sim-decision-card" class="glass-card rounded-2xl p-6 border border-rose-500/40 bg-gradient-to-br from-rose-950/20 to-slate-900 space-y-4">
             <div class="flex items-center justify-between">
               <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Underwriting Disposition</span>
@@ -391,7 +373,6 @@ def build_dashboard():
               </span>
             </div>
 
-            <!-- Risk Gauge -->
             <div class="space-y-2">
               <div class="flex justify-between items-baseline">
                 <span class="text-xs text-slate-400">Calibrated Default Risk P(Default)</span>
@@ -408,13 +389,11 @@ def build_dashboard():
               </div>
             </div>
 
-            <!-- Policy Action Note -->
             <div id="sim-action-text" class="p-3 rounded-lg bg-slate-950/60 border border-slate-800 text-xs text-slate-300 leading-relaxed">
               Default risk exceeds the 65% automatic decline threshold. Application is rejected immediately, and an FCRA Adverse Action Statement must be provided.
             </div>
           </div>
 
-          <!-- SHAP Waterfall Drivers -->
           <div class="glass-card rounded-2xl p-6 space-y-4">
             <h4 class="text-xs font-bold text-white uppercase tracking-wider text-slate-400 flex items-center justify-between">
               <span>SHAP Feature Attributions</span>
@@ -425,17 +404,14 @@ def build_dashboard():
             </p>
 
             <div id="sim-shap-bars" class="space-y-2 text-xs">
-              <!-- Dynamically populated via JS -->
             </div>
           </div>
 
-          <!-- Adverse Action Notice Box -->
           <div id="sim-adverse-box" class="glass-card rounded-2xl p-5 border border-amber-500/30 bg-amber-950/10 space-y-3">
             <div class="flex items-center gap-2 text-xs font-bold text-amber-400">
               <span>📋</span> Official FCRA § 615(a) Adverse Action Reasons
             </div>
             <ul id="sim-adverse-list" class="space-y-1.5 text-xs text-slate-300 list-disc list-inside">
-              <!-- Dynamically populated -->
             </ul>
           </div>
 
@@ -445,9 +421,7 @@ def build_dashboard():
 
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- TAB 3: MACHINE LEARNING THEORY                                       -->
-    <!-- ===================================================================== -->
+    <!-- TAB 3: MACHINE LEARNING THEORY -->
     <div id="tab-content-theory" class="hidden space-y-8">
       
       <div class="glass-card rounded-2xl p-8 border border-purple-500/20 bg-gradient-to-r from-purple-950/20 via-slate-900 to-slate-950 space-y-4">
@@ -462,7 +436,6 @@ def build_dashboard():
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        <!-- Card 1: The Imbalance Trap -->
         <div class="glass-card rounded-xl p-6 space-y-4">
           <div class="flex items-center gap-3">
             <span class="text-2xl">⚖️</span>
@@ -477,12 +450,11 @@ def build_dashboard():
           </div>
           <div class="text-xs space-y-2 text-slate-400">
             <div class="font-semibold text-slate-300">How we solve it in this project:</div>
-            <div>&bull; <strong class="text-indigo-400">Class-Weighted Loss</strong>: We multiply the loss penalty on minority default errors by \( w_1 = \frac{N_0}{N_1} \approx 2.33 \). The AI gets punished 2.33x harder if it misses a default.</div>
+            <div>&bull; <strong class="text-indigo-400">Class-Weighted Loss</strong>: We multiply the loss penalty on minority default errors by w1 = N_0 / N_1 ≈ 2.33. The AI gets punished 2.33x harder if it misses a default.</div>
             <div>&bull; <strong class="text-purple-400">SMOTE</strong>: Creates synthetic, realistic artificial default examples along lines connecting neighboring default records.</div>
           </div>
         </div>
 
-        <!-- Card 2: Tree Ensembles vs Logistic Regression -->
         <div class="glass-card rounded-xl p-6 space-y-4">
           <div class="flex items-center gap-3">
             <span class="text-2xl">🌲</span>
@@ -498,7 +470,6 @@ def build_dashboard():
           </div>
         </div>
 
-        <!-- Card 3: Platt Scaling -->
         <div class="glass-card rounded-xl p-6 space-y-4">
           <div class="flex items-center gap-3">
             <span class="text-2xl">📈</span>
@@ -508,13 +479,12 @@ def build_dashboard():
             </div>
           </div>
           <div class="p-3 rounded-lg bg-slate-950/60 border border-slate-800 text-xs text-slate-300 space-y-2">
-            <p>XGBoost outputs a margin \( f(x) \). If the model is uncalibrated, a raw score of 0.85 might only mean a 60% real-world default rate!</p>
+            <p>XGBoost outputs a margin f(x). If the model is uncalibrated, a raw score of 0.85 might only mean a 60% real-world default rate!</p>
             <p class="font-mono text-indigo-300 text-[11px]">P(Y=1 | f(x)) = 1 / (1 + exp(A &bull; f(x) + B))</p>
             <p>Platt scaling fits a post-hoc logistic transformation over cross-validation holdouts. This reduced our <strong>Brier Score</strong> from <strong>0.1740 &rarr; 0.1570</strong> (a 9.7% improvement in risk honesty).</p>
           </div>
         </div>
 
-        <!-- Card 4: SHAP Game Theory -->
         <div class="glass-card rounded-xl p-6 space-y-4">
           <div class="flex items-center gap-3">
             <span class="text-2xl">🔍</span>
@@ -535,9 +505,7 @@ def build_dashboard():
 
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- TAB 4: BENCHMARK & METRICS                                           -->
-    <!-- ===================================================================== -->
+    <!-- TAB 4: BENCHMARK & METRICS -->
     <div id="tab-content-benchmark" class="hidden space-y-8">
       
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -550,7 +518,6 @@ def build_dashboard():
         </div>
       </div>
 
-      <!-- Metrics Summary Table -->
       <div class="glass-card rounded-xl overflow-hidden border border-slate-800">
         <div class="overflow-x-auto">
           <table class="w-full text-left text-xs text-slate-300">
@@ -627,7 +594,6 @@ def build_dashboard():
         </div>
       </div>
 
-      <!-- Figures Carousel / Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="glass-card rounded-xl p-5 space-y-3">
           <div class="flex items-center justify-between">
@@ -636,7 +602,7 @@ def build_dashboard():
           </div>
           <p class="text-xs text-slate-400">Notice PR-AUC on the right: XGBoost leads with 0.665, capturing the rare 30% defaulter class with superior precision.</p>
           <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-            <img src="{img_roc_pr}" alt="ROC and PR Curves" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
+            <img src="__IMG_ROC_PR__" alt="ROC and PR Curves" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
           </div>
         </div>
 
@@ -647,7 +613,7 @@ def build_dashboard():
           </div>
           <p class="text-xs text-slate-400">The diagonal dotted line represents perfect calibration. Platt-scaled XGBoost (green) aligns tightly with true default frequencies.</p>
           <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-            <img src="{img_cal}" alt="Calibration Curves" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
+            <img src="__IMG_CAL__" alt="Calibration Curves" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
           </div>
         </div>
       </div>
@@ -660,7 +626,7 @@ def build_dashboard():
           </div>
           <p class="text-xs text-slate-400">Comparing ROC-AUC, PR-AUC, F1, and False Positive Rate side-by-side.</p>
           <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-            <img src="{img_model_comp}" alt="Model Comparison" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
+            <img src="__IMG_MODEL_COMP__" alt="Model Comparison" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
           </div>
         </div>
 
@@ -671,16 +637,14 @@ def build_dashboard():
           </div>
           <p class="text-xs text-slate-400">How the test partition splits across Tier 1 (Auto-Approve), Tier 2 (Human Review), and Tier 3 (Auto-Decline).</p>
           <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-            <img src="{img_uncertainty}" alt="Uncertainty Distribution" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
+            <img src="__IMG_UNCERTAINTY_DIST__" alt="Uncertainty Distribution" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
           </div>
         </div>
       </div>
 
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- TAB 5: SHAP EXPLAINABILITY                                           -->
-    <!-- ===================================================================== -->
+    <!-- TAB 5: SHAP EXPLAINABILITY -->
     <div id="tab-content-shap" class="hidden space-y-8">
       
       <div class="glass-card rounded-2xl p-6 border border-purple-500/30 bg-gradient-to-r from-purple-950/30 via-slate-900 to-slate-950 flex flex-col md:flex-row items-center justify-between gap-6">
@@ -695,7 +659,6 @@ def build_dashboard():
         </div>
       </div>
 
-      <!-- Macro SHAP: Beeswarm & Summary Bar -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="glass-card rounded-xl p-5 space-y-3">
           <div class="flex items-center justify-between">
@@ -704,7 +667,7 @@ def build_dashboard():
           </div>
           <p class="text-xs text-slate-400">Every dot is an applicant. Red = high feature value; Blue = low. High loan duration and overdrawn checking account push dots far to the right (increased default risk).</p>
           <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-            <img src="{img_shap_beeswarm}" alt="SHAP Beeswarm" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
+            <img src="__IMG_BEESWARM__" alt="SHAP Beeswarm" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
           </div>
         </div>
 
@@ -715,12 +678,11 @@ def build_dashboard():
           </div>
           <p class="text-xs text-slate-400">Top 3 macro risk indicators across the entire portfolio: Loan Duration, Checking Account Balance Status, and Credit Amount.</p>
           <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-            <img src="{img_shap_summary}" alt="SHAP Summary Bar" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
+            <img src="__IMG_SUMMARY__" alt="SHAP Summary Bar" class="w-full h-auto object-contain hover:scale-105 transition-transform duration-300">
           </div>
         </div>
       </div>
 
-      <!-- Micro SHAP: 3 Empirical Case Studies -->
       <div class="space-y-4">
         <div class="flex items-center justify-between">
           <h3 class="text-base font-bold text-white flex items-center gap-2">
@@ -733,7 +695,6 @@ def build_dashboard():
           </div>
         </div>
 
-        <!-- Case 1: Declined -->
         <div id="case-study-declined" class="glass-card rounded-xl p-6 space-y-4 border border-rose-500/30">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800 pb-3">
             <div>
@@ -746,7 +707,7 @@ def build_dashboard():
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-7 rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-              <img src="{img_shap_declined}" alt="SHAP Waterfall Declined" class="w-full h-auto object-contain">
+              <img src="__IMG_DECLINED__" alt="SHAP Waterfall Declined" class="w-full h-auto object-contain">
             </div>
             <div class="lg:col-span-5 space-y-3">
               <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Generated FCRA Adverse Action Disclosure</h5>
@@ -763,7 +724,6 @@ def build_dashboard():
           </div>
         </div>
 
-        <!-- Case 2: Approved -->
         <div id="case-study-approved" class="hidden glass-card rounded-xl p-6 space-y-4 border border-emerald-500/30">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800 pb-3">
             <div>
@@ -776,7 +736,7 @@ def build_dashboard():
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-7 rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-              <img src="{img_shap_approved}" alt="SHAP Waterfall Approved" class="w-full h-auto object-contain">
+              <img src="__IMG_APPROVED__" alt="SHAP Waterfall Approved" class="w-full h-auto object-contain">
             </div>
             <div class="lg:col-span-5 space-y-3">
               <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Underwriting Approval Summary</h5>
@@ -790,7 +750,6 @@ def build_dashboard():
           </div>
         </div>
 
-        <!-- Case 3: Uncertain -->
         <div id="case-study-uncertain" class="hidden glass-card rounded-xl p-6 space-y-4 border border-amber-500/30">
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800 pb-3">
             <div>
@@ -803,7 +762,7 @@ def build_dashboard():
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
             <div class="lg:col-span-7 rounded-lg overflow-hidden border border-slate-800 bg-slate-950">
-              <img src="{img_shap_uncertain}" alt="SHAP Waterfall Uncertain" class="w-full h-auto object-contain">
+              <img src="__IMG_UNCERTAIN__" alt="SHAP Waterfall Uncertain" class="w-full h-auto object-contain">
             </div>
             <div class="lg:col-span-5 space-y-3">
               <h5 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Underwriter Queue Action</h5>
@@ -819,7 +778,6 @@ def build_dashboard():
 
       </div>
 
-      <!-- Cross-Validation Stability -->
       <div class="glass-card rounded-xl p-5 space-y-3">
         <div class="flex items-center justify-between">
           <h3 class="text-sm font-bold text-white">SHAP Stability Across 5 Cross-Validation Folds</h3>
@@ -829,15 +787,13 @@ def build_dashboard():
           A crucial teacher requirement: Do SHAP rankings change randomly across different training splits? The heatmaps and Spearman correlation (~0.94) prove that feature importance is rock-solid and stable.
         </p>
         <div class="rounded-lg overflow-hidden border border-slate-800 bg-slate-950 max-h-96 flex items-center justify-center">
-          <img src="{img_shap_stability}" alt="SHAP Stability" class="w-auto h-80 object-contain">
+          <img src="__IMG_STABILITY__" alt="SHAP Stability" class="w-auto h-80 object-contain">
         </div>
       </div>
 
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- TAB 6: CODE ARCHITECTURE WALKTHROUGH                                 -->
-    <!-- ===================================================================== -->
+    <!-- TAB 6: CODE ARCHITECTURE WALKTHROUGH -->
     <div id="tab-content-code" class="hidden space-y-8">
       
       <div class="glass-card rounded-2xl p-6 border border-blue-500/20 bg-gradient-to-r from-blue-950/20 via-slate-900 to-slate-950 space-y-3">
@@ -850,7 +806,6 @@ def build_dashboard():
         </p>
       </div>
 
-      <!-- Code Tabs Navigation -->
       <div class="flex items-center gap-2 overflow-x-auto pb-2 border-b border-slate-800 text-xs">
         <button onclick="switchCodeTab('preproc')" id="btn-code-preproc" class="px-4 py-2 rounded-lg bg-indigo-600 text-white font-medium">1. preprocessing.py</button>
         <button onclick="switchCodeTab('models')" id="btn-code-models" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-medium">2. models.py</button>
@@ -859,7 +814,6 @@ def build_dashboard():
         <button onclick="switchCodeTab('pipeline')" id="btn-code-pipeline" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-medium">5. pipeline.py</button>
       </div>
 
-      <!-- Code Snippets -->
       <div id="code-snippet-preproc" class="space-y-4">
         <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
           <h4 class="text-sm font-bold text-white">Data Leakage Prevention & ColumnTransformer</h4>
@@ -922,12 +876,12 @@ def get_xgb_pipeline():
         eval_metric='logloss',
         random_state=42
     )
-    param_grid = {{
+    param_grid = {
         'max_depth': [3, 4, 6],
         'learning_rate': [0.01, 0.05, 0.1],
         'n_estimators': [100, 200],
         'subsample': [0.8, 1.0]
-    }}
+    }
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
     return GridSearchCV(xgb, param_grid, cv=cv, scoring='roc_auc', n_jobs=-1)</code></pre>
       </div>
@@ -957,11 +911,11 @@ def compute_calibration_metrics(y_true, p_uncal, p_cal):
     brier_uncal = brier_score_loss(y_true, p_uncal)
     brier_cal = brier_score_loss(y_true, p_cal)
     improvement = ((brier_uncal - brier_cal) / brier_uncal) * 100
-    return {{
+    return {
         'brier_uncal': brier_uncal,
         'brier_cal': brier_cal,
         'improvement_pct': improvement
-    }}</code></pre>
+    }</code></pre>
       </div>
 
       <div id="code-snippet-xai" class="hidden space-y-4">
@@ -1016,7 +970,7 @@ def run_pipeline():
     models_dict = tune_and_train_models(X_train, y_train)
     
     # 4. Platt Calibration
-    calibrated_models = {{name: calibrate_model(m, X_train, y_train) for name, m in models_dict.items()}}
+    calibrated_models = {name: calibrate_model(m, X_train, y_train) for name, m in models_dict.items()}
     
     # 5. Evaluate & Generate Figures
     eval_df = evaluate_models(calibrated_models, X_test, y_test)
@@ -1029,9 +983,7 @@ def run_pipeline():
 
     </div>
 
-    <!-- ===================================================================== -->
-    <!-- TAB 7: VIVA & EXAM DEFENSE PREP                                      -->
-    <!-- ===================================================================== -->
+    <!-- TAB 7: VIVA & EXAM DEFENSE PREP -->
     <div id="tab-content-viva" class="hidden space-y-8">
       
       <div class="glass-card rounded-2xl p-6 border border-emerald-500/20 bg-gradient-to-r from-emerald-950/20 via-slate-900 to-slate-950 space-y-3">
@@ -1044,7 +996,6 @@ def run_pipeline():
         </p>
       </div>
 
-      <!-- Flashcards Accordion -->
       <div class="space-y-4">
         
         <div class="glass-card rounded-xl p-5 border border-slate-800 cursor-pointer hover:border-indigo-500/50 transition-all" onclick="toggleViva(1)">
@@ -1124,7 +1075,6 @@ def run_pipeline():
 
       </div>
 
-      <!-- Quick Interactive Quiz -->
       <div class="glass-card rounded-2xl p-6 border border-indigo-500/30 space-y-4">
         <h3 class="text-base font-bold text-white flex items-center gap-2">
           <span>📝</span> 3-Minute Knowledge Check
@@ -1132,7 +1082,6 @@ def run_pipeline():
         <p class="text-xs text-slate-400">Test if you're ready for your lab evaluation:</p>
 
         <div class="space-y-4 text-xs">
-          <!-- Quiz Item 1 -->
           <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
             <p class="font-semibold text-slate-200">1. If you calculate the imputer median on the whole dataset before train_test_split, what is this error called?</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -1143,7 +1092,6 @@ def run_pipeline():
             </div>
           </div>
 
-          <!-- Quiz Item 2 -->
           <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
             <p class="font-semibold text-slate-200">2. What metric assesses whether predicted probabilities match true default rates?</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -1160,7 +1108,6 @@ def run_pipeline():
 
   </main>
 
-  <!-- Footer -->
   <footer class="glass-card border-t border-slate-800 px-6 py-4 mt-12 text-xs text-slate-500">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
       <div>University ML Lab Project &bull; Credit Default Risk Prediction using SHAP & Tree Ensembles</div>
@@ -1170,89 +1117,80 @@ def run_pipeline():
     </div>
   </footer>
 
-  <!-- Interactive JavaScript Engine -->
   <script>
-    // Tab switching
-    function switchTab(tabId) {{
+    function switchTab(tabId) {
       const tabs = ['overview', 'simulator', 'theory', 'benchmark', 'shap', 'code', 'viva'];
-      tabs.forEach(t => {{
+      tabs.forEach(t => {
         const btn = document.getElementById('tab-btn-' + t);
         const content = document.getElementById('tab-content-' + t);
-        if (t === tabId) {{
+        if (t === tabId) {
           btn.classList.add('active');
           btn.classList.remove('text-slate-400');
           btn.classList.add('text-white');
           content.classList.remove('hidden');
-        }} else {{
+        } else {
           btn.classList.remove('active');
           btn.classList.add('text-slate-400');
           btn.classList.remove('text-white');
           content.classList.add('hidden');
-        }}
-      }});
-      window.scrollTo({{ top: 0, behavior: 'smooth' }});
-    }}
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-    // Case Study Switching in SHAP Tab
-    function switchCaseStudy(caseId) {{
+    function switchCaseStudy(caseId) {
       const cases = ['declined', 'approved', 'uncertain'];
-      cases.forEach(c => {{
+      cases.forEach(c => {
         const btn = document.getElementById('btn-case-' + c);
         const content = document.getElementById('case-study-' + c);
-        if (c === caseId) {{
+        if (c === caseId) {
           btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-indigo-600 text-white shadow-lg';
           content.classList.remove('hidden');
-        }} else {{
+        } else {
           btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:text-white';
           content.classList.add('hidden');
-        }}
-      }});
-    }}
+        }
+      });
+    }
 
-    // Code Tab Switching
-    function switchCodeTab(codeId) {{
+    function switchCodeTab(codeId) {
       const codes = ['preproc', 'models', 'calib', 'xai', 'pipeline'];
-      codes.forEach(c => {{
+      codes.forEach(c => {
         const btn = document.getElementById('btn-code-' + c);
         const snippet = document.getElementById('code-snippet-' + c);
-        if (c === codeId) {{
+        if (c === codeId) {
           btn.className = 'px-4 py-2 rounded-lg bg-indigo-600 text-white font-medium';
           snippet.classList.remove('hidden');
-        }} else {{
+        } else {
           btn.className = 'px-4 py-2 rounded-lg bg-slate-800 text-slate-400 hover:text-white font-medium';
           snippet.classList.add('hidden');
-        }}
-      }});
-    }}
+        }
+      });
+    }
 
-    // Toggle Viva Accordion
-    function toggleViva(id) {{
+    function toggleViva(id) {
       const ans = document.getElementById('viva-ans-' + id);
       const icon = document.getElementById('viva-icon-' + id);
-      if (ans.classList.contains('hidden')) {{
+      if (ans.classList.contains('hidden')) {
         ans.classList.remove('hidden');
         icon.innerHTML = '&minus;';
-      }} else {{
+      } else {
         ans.classList.add('hidden');
         icon.innerHTML = '&plus;';
-      }}
-    }}
+      }
+    }
 
-    // Quiz Check
-    function checkQuiz(btn, isCorrect) {{
-      if (isCorrect) {{
+    function checkQuiz(btn, isCorrect) {
+      if (isCorrect) {
         btn.classList.remove('bg-slate-800', 'text-slate-300');
         btn.classList.add('bg-emerald-600', 'text-white', 'font-bold');
-      }} else {{
+      } else {
         btn.classList.remove('bg-slate-800', 'text-slate-300');
         btn.classList.add('bg-rose-600', 'text-white', 'opacity-60');
-      }}
-    }}
+      }
+    }
 
-    // ------------------------------------------------------------------------
-    // SIMULATOR LOGIC & SHAP WATERFALL ESTIMATOR
-    // ------------------------------------------------------------------------
-    function updateSimulator() {{
+    function updateSimulator() {
       const duration = parseInt(document.getElementById('input-duration').value);
       const amount = parseInt(document.getElementById('input-amount').value);
       const checking = document.getElementById('input-checking').value;
@@ -1261,50 +1199,42 @@ def run_pipeline():
       const housing = document.getElementById('input-housing').value;
       const employment = document.getElementById('input-employment').value;
 
-      // Update Labels
       document.getElementById('val-duration').innerText = duration + ' months';
       document.getElementById('val-amount').innerText = amount.toLocaleString() + ' DM';
       document.getElementById('val-age').innerText = age + ' yrs';
 
-      // Base log-odds for German credit (~30% default prevalence)
       let baseLogOdds = -0.85;
-
-      // Calculate SHAP contributions
       let shapDrivers = [];
 
-      // Duration: longer loan = higher default probability
       let shapDuration = ((duration - 20) / 10) * 0.28;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'duration',
         name: 'Loan Duration (' + duration + ' mos)',
         impact: shapDuration,
         reason: 'Duration of requested loan term is excessively long relative to risk profile.'
-      }});
+      });
 
-      // Credit Amount
       let shapAmount = ((amount - 3000) / 3000) * 0.18;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'credit_amount',
         name: 'Credit Amount (' + amount.toLocaleString() + ' DM)',
         impact: shapAmount,
         reason: 'Requested credit amount is high relative to borrower repayment capacity.'
-      }});
+      });
 
-      // Checking Account
       let shapChecking = 0;
       let checkingReason = 'Status of checking account is low, overdrawn, or absent.';
       if (checking === 'lt_0') shapChecking = 0.58;
       else if (checking === '0_to_200') shapChecking = 0.22;
       else if (checking === 'ge_200') shapChecking = -0.25;
       else if (checking === 'no_checking') shapChecking = -0.42;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'checking_status',
         name: 'Checking Account Balance',
         impact: shapChecking,
         reason: checkingReason
-      }});
+      });
 
-      // Savings
       let shapSavings = 0;
       let savingsReason = 'Insufficient liquid reserves or low balance in savings/investment accounts.';
       if (savings === 'lt_100') shapSavings = 0.32;
@@ -1312,53 +1242,48 @@ def run_pipeline():
       else if (savings === '500_to_1000') shapSavings = -0.15;
       else if (savings === 'ge_1000') shapSavings = -0.38;
       else if (savings === 'unknown') shapSavings = -0.05;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'savings_status',
         name: 'Savings Reserves',
         impact: shapSavings,
         reason: savingsReason
-      }});
+      });
 
-      // Age
       let shapAge = ((35 - age) / 15) * 0.16;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'age',
         name: 'Borrower Age (' + age + ' yrs)',
         impact: shapAge,
         reason: 'Age and short financial history relative to requested obligation.'
-      }});
+      });
 
-      // Housing
       let shapHousing = 0;
       if (housing === 'rent') shapHousing = 0.14;
       else if (housing === 'own') shapHousing = -0.20;
       else if (housing === 'for_free') shapHousing = 0.10;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'housing',
         name: 'Housing (' + housing + ')',
         impact: shapHousing,
         reason: 'Residential tenancy status increases exposure to financial shocks.'
-      }});
+      });
 
-      // Employment
       let shapEmp = 0;
       if (employment === 'unemployed') shapEmp = 0.40;
       else if (employment === 'lt_1') shapEmp = 0.18;
       else if (employment === '1_to_4') shapEmp = 0.02;
       else if (employment === '4_to_7') shapEmp = -0.14;
       else if (employment === 'ge_7') shapEmp = -0.30;
-      shapDrivers.push({{
+      shapDrivers.push({
         code: 'employment',
         name: 'Employment Stability',
         impact: shapEmp,
         reason: 'Short employment tenure or current employment disruption.'
-      }});
+      });
 
-      // Sum log odds
       let totalLogOdds = baseLogOdds;
-      shapDrivers.forEach(d => {{ totalLogOdds += d.impact; }});
+      shapDrivers.forEach(d => { totalLogOdds += d.impact; });
 
-      // Platt Scaling calibrated sigmoid mapping
       let calibratedProb = 1 / (1 + Math.exp(- (1.12 * totalLogOdds - 0.08)));
       if (calibratedProb < 0.03) calibratedProb = 0.03;
       if (calibratedProb > 0.96) calibratedProb = 0.96;
@@ -1367,45 +1292,40 @@ def run_pipeline():
       document.getElementById('sim-prob-text').innerText = pct + '%';
       document.getElementById('sim-prob-bar').style.width = pct + '%';
 
-      // Update Tiers and Styles
       const card = document.getElementById('sim-decision-card');
       const badge = document.getElementById('sim-tier-badge');
       const actionText = document.getElementById('sim-action-text');
       const probText = document.getElementById('sim-prob-text');
       const adverseBox = document.getElementById('sim-adverse-box');
 
-      if (calibratedProb < 0.30) {{
-        // Tier 1: Auto-Approve
+      if (calibratedProb < 0.30) {
         badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40';
         badge.innerText = 'TIER 1: AUTO-APPROVE';
         probText.className = 'text-3xl font-extrabold text-emerald-400 font-mono';
         card.className = 'glass-card rounded-2xl p-6 border border-emerald-500/40 bg-gradient-to-br from-emerald-950/20 to-slate-900 space-y-4';
         actionText.innerText = 'Default risk is strictly under 30%. Application is approved immediately with competitive interest rate.';
         adverseBox.classList.add('hidden');
-      }} else if (calibratedProb <= 0.65) {{
-        // Tier 2: Human Review
+      } else if (calibratedProb <= 0.65) {
         badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40';
         badge.innerText = 'TIER 2: HUMAN REVIEW';
         probText.className = 'text-3xl font-extrabold text-amber-400 font-mono';
         card.className = 'glass-card rounded-2xl p-6 border border-amber-500/40 bg-gradient-to-br from-amber-950/20 to-slate-900 space-y-4';
         actionText.innerText = 'Default risk is in the 30% - 65% high-uncertainty zone. Automated decision is suspended; application is routed to Senior Underwriter for collateral evaluation.';
         adverseBox.classList.remove('hidden');
-      }} else {{
-        // Tier 3: Auto-Decline
+      } else {
         badge.className = 'px-3 py-1 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40';
         badge.innerText = 'TIER 3: AUTO-DECLINE';
         probText.className = 'text-3xl font-extrabold text-rose-400 font-mono';
         card.className = 'glass-card rounded-2xl p-6 border border-rose-500/40 bg-gradient-to-br from-rose-950/20 to-slate-900 space-y-4';
         actionText.innerText = 'Default risk exceeds the 65% threshold. Application is declined; federal regulations require issuing an Adverse Action notice detailing the top reasons.';
         adverseBox.classList.remove('hidden');
-      }}
+      }
 
-      // Render SHAP Waterfall Bars
       shapDrivers.sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact));
       const container = document.getElementById('sim-shap-bars');
       container.innerHTML = '';
 
-      shapDrivers.forEach(d => {{
+      shapDrivers.forEach(d => {
         const isPos = d.impact >= 0;
         const widthPct = Math.min(Math.abs(d.impact) * 85, 100);
         const color = isPos ? 'bg-rose-500' : 'bg-emerald-500';
@@ -1416,33 +1336,32 @@ def run_pipeline():
         row.className = 'space-y-1';
         row.innerHTML = `
           <div class="flex justify-between text-[11px]">
-            <span class="text-slate-300 font-medium">${{d.name}}</span>
-            <span class="font-mono font-bold ${{textColor}}">${{sign}}${{d.impact.toFixed(2)}} log-odds</span>
+            <span class="text-slate-300 font-medium">${d.name}</span>
+            <span class="font-mono font-bold ${textColor}">${sign}${d.impact.toFixed(2)} log-odds</span>
           </div>
           <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden flex">
-            <div class="${{color}} h-full transition-all duration-300 rounded-full" style="width: ${{widthPct}}%;"></div>
+            <div class="${color} h-full transition-all duration-300 rounded-full" style="width: ${widthPct}%;"></div>
           </div>
         `;
         container.appendChild(row);
-      }});
+      });
 
-      // Populate Adverse Action List
       const adverseList = document.getElementById('sim-adverse-list');
       adverseList.innerHTML = '';
       const adverseFactors = shapDrivers.filter(d => d.impact > 0).slice(0, 4);
 
-      if (adverseFactors.length === 0) {{
+      if (adverseFactors.length === 0) {
         adverseList.innerHTML = '<li class="text-slate-400">No adverse risk drivers detected.</li>';
-      }} else {{
-        adverseFactors.forEach(f => {{
+      } else {
+        adverseFactors.forEach(f => {
           const li = document.createElement('li');
-          li.innerHTML = `<strong>${{f.name}}</strong>: ${{f.reason}}`;
+          li.innerHTML = `<strong>${f.name}</strong>: ${f.reason}`;
           adverseList.appendChild(li);
-        }});
-      }}
-    }}
+        });
+      }
+    }
 
-    function resetSimulator() {{
+    function resetSimulator() {
       document.getElementById('input-duration').value = 48;
       document.getElementById('input-amount').value = 3915;
       document.getElementById('input-checking').value = 'lt_0';
@@ -1451,16 +1370,27 @@ def run_pipeline():
       document.getElementById('input-housing').value = 'rent';
       document.getElementById('input-employment').value = 'lt_1';
       updateSimulator();
-    }}
+    }
 
-    // Initialize on load
-    window.addEventListener('DOMContentLoaded', () => {{
+    window.addEventListener('DOMContentLoaded', () => {
       updateSimulator();
-    }});
+    });
   </script>
 </body>
 </html>
 """
+
+    # Replace placeholders with base64 images
+    html_content = template.replace("__IMG_ROC_PR__", img_roc_pr)
+    html_content = html_content.replace("__IMG_CAL__", img_cal)
+    html_content = html_content.replace("__IMG_MODEL_COMP__", img_model_comp)
+    html_content = html_content.replace("__IMG_BEESWARM__", img_shap_beeswarm)
+    html_content = html_content.replace("__IMG_SUMMARY__", img_shap_summary)
+    html_content = html_content.replace("__IMG_DECLINED__", img_shap_declined)
+    html_content = html_content.replace("__IMG_APPROVED__", img_shap_approved)
+    html_content = html_content.replace("__IMG_UNCERTAIN__", img_shap_uncertain)
+    html_content = html_content.replace("__IMG_STABILITY__", img_shap_stability)
+    html_content = html_content.replace("__IMG_UNCERTAINTY_DIST__", img_uncertainty)
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         f.write(html_content)
