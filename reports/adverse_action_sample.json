@@ -1,0 +1,64 @@
+{
+  "declined_applicant": {
+    "applicant_id": 37,
+    "calibrated_default_risk": 0.7451746813946346,
+    "underwriting_disposition": "DECLINED",
+    "top_adverse_reasons": [
+      {
+        "factor_code": "duration",
+        "feature_value": 2.3056855566567815,
+        "shap_impact": 0.7954630851745605,
+        "regulatory_disclosure_statement": "Duration of requested loan term is excessively long relative to risk profile."
+      },
+      {
+        "factor_code": "checking_status_no_checking",
+        "feature_value": 0.0,
+        "shap_impact": 0.4340616762638092,
+        "regulatory_disclosure_statement": "Status of checking account is low, overdrawn, or absent."
+      },
+      {
+        "factor_code": "credit_amount",
+        "feature_value": 0.4185855930994574,
+        "shap_impact": 0.4044024348258972,
+        "regulatory_disclosure_statement": "Requested credit amount is high relative to borrower repayment capacity."
+      },
+      {
+        "factor_code": "checking_status_lt_0",
+        "feature_value": 1.0,
+        "shap_impact": 0.23026496171951294,
+        "regulatory_disclosure_statement": "Status of checking account is low, overdrawn, or absent."
+      }
+    ]
+  },
+  "borderline_applicant": {
+    "applicant_id": 3,
+    "calibrated_default_risk": 0.46634310501831433,
+    "underwriting_disposition": "UNDERWRITER REVIEW",
+    "top_adverse_reasons": [
+      {
+        "factor_code": "credit_history_no_credits_all_paid",
+        "feature_value": 1.0,
+        "shap_impact": 0.43723928928375244,
+        "regulatory_disclosure_statement": "Adverse credit history or past delinquency on existing obligations."
+      },
+      {
+        "factor_code": "checking_status_no_checking",
+        "feature_value": 0.0,
+        "shap_impact": 0.36501961946487427,
+        "regulatory_disclosure_statement": "Status of checking account is low, overdrawn, or absent."
+      },
+      {
+        "factor_code": "checking_status_lt_0",
+        "feature_value": 1.0,
+        "shap_impact": 0.2791762948036194,
+        "regulatory_disclosure_statement": "Status of checking account is low, overdrawn, or absent."
+      },
+      {
+        "factor_code": "savings_status_lt_100",
+        "feature_value": 1.0,
+        "shap_impact": 0.2390809953212738,
+        "regulatory_disclosure_statement": "Insufficient liquid reserves or low balance in savings/investment accounts."
+      }
+    ]
+  }
+}
